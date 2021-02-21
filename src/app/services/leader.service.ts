@@ -4,20 +4,31 @@ import { LEADERS } from '../shared/leaders';
 import {Promotion} from '../shared/promotion';
 import {PROMOTIONS} from '../shared/promotions';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LeaderService {
 
   constructor() { }
 
-  getLeaders(): Leader[] {
-    return LEADERS;
+  getLeaders(): Promise<Leader[]> {
+    return new Promise(resolve=> {
+      // Simulate server latency with 2 second delay
+        setTimeout(() => resolve(LEADERS), 2000);
+    });
   }
 
-  getLeader(id: number): Leader {
-    return LEADERS.filter((leader) => (leader.id === id))[0];
+  getLeader(id: number): Promise<Leader> {
+    return new Promise(resolve=> {
+      // Simulate server latency with 2 second delay
+        setTimeout(() => resolve(LEADERS.filter((leader) => (leader.id === id))[0]), 2000);
+    });
   }
 
-  getFeaturedleader(): Leader {
-    return LEADERS.filter((leader) => leader.featured)[0];
+  getFeaturedleader(): Promise<Leader> {
+    return new Promise(resolve=> {
+      // Simulate server latency with 2 second delay
+        setTimeout(() => resolve(LEADERS.filter((leader) => leader.featured)[0]), 2000);
+    });
   }
 }

@@ -12,7 +12,8 @@ import { DishService } from '../services/dish.service';
 export class MenuComponent implements OnInit {
 
   ngOnInit() {
-    this.dishes = this.dishService.getDishes();
+    this.dishService.getDishes()
+      .then(dishes => this.dishes = dishes);
   }
 
   dishes!: Dish[];
